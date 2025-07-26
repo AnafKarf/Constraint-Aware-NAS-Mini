@@ -17,6 +17,7 @@ OPS = {
     nn.Conv2d(C, C, (7,1), stride=(stride, 1), padding=(3, 0), bias=False),
     nn.BatchNorm2d(C, affine=affine)
     ),
+  'param_softplus' : lambda C, stride, affine: ParamSoftplusOP(),
 }
 
 class ReLUConvBN(nn.Module):
@@ -102,4 +103,14 @@ class FactorizedReduce(nn.Module):
     out = torch.cat([self.conv_1(x), self.conv_2(x[:,:,1:,1:])], dim=1)
     out = self.bn(out)
     return out
+
+class ParamSoftplusOP(nn.Module):
+
+  def __init__(self, omega_init=1.0):
+    super(ParamSoftplusOP, self).__init__()
+
+    self.omega = nn.Parameter(torch.tensor(float(omega_init)))
+
+  def forward(self, x):
+    return (1.0 / self.omega) * torch.log1p(torch.exp(self.omega * x))
 
