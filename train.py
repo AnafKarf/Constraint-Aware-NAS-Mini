@@ -20,6 +20,8 @@ from darts_space.genotypes import Genotype
 from darts_space.model import NetworkCIFAR as Network
 from attack.attack_lib import madry_loss, pgd_attack
 
+from darts_space.operations import ParamSoftplusOP
+
 
 ADV_RUSH = {'normal': [('sep_conv_3x3', 1), ('sep_conv_3x3', 0), ('sep_conv_5x5', 0), ('sep_conv_3x3', 1), ('sep_conv_3x3', 1), ('sep_conv_3x3', 0), ('skip_connect', 0), ('sep_conv_3x3', 1)], 'normal_concat': range(2, 6), 'reduction': [('sep_conv_3x3', 0), ('sep_conv_3x3', 1), ('skip_connect', 0), ('dil_conv_3x3', 2), ('skip_connect', 0), ('avg_pool_3x3', 1), ('skip_connect', 0), ('skip_connect', 2)], 'reduction_concat':range(2, 6)}
 DRNAS_CIFAR = {'normal': [('sep_conv_3x3', 0), ('sep_conv_5x5', 1), ('sep_conv_3x3', 1), ('sep_conv_3x3', 2), ('skip_connect', 0), ('sep_conv_3x3', 1), ('sep_conv_3x3', 2), ('dil_conv_5x5', 3)], 'normal_concat': range(2, 6), 'reduction': [('max_pool_3x3', 0), ('sep_conv_5x5', 1), ('dil_conv_5x5', 2), ('sep_conv_5x5', 1), ('sep_conv_5x5', 1), ('dil_conv_5x5', 3), ('skip_connect', 4), ('sep_conv_5x5', 1)], 'reduction_concat': range(2, 6)}
@@ -440,6 +442,13 @@ def train_single(args, train_queue, model, criterion, optimizer, lr_scheduler):
         loss.backward()
         nn.utils.clip_grad_norm(model.parameters(), args.grad_clip)
         optimizer.step()
+
+        if args.proj_constraints:
+            for name, W in model.named_parameters(): 
+                if 'weight' in name: W.data = spectral_clip(W.data, args.beta) 
+            for mod in model.modules(): 
+                if isinstance(mod, ParamSoftplusOp): 
+                    mod.omega.data.clamp_(max=args.kappa*2)
         
         prec1, prec5 = utils.accuracy(logits, target, topk=(1, 5))
         n = input.size(0)
@@ -460,6 +469,9 @@ def train_single(args, train_queue, model, criterion, optimizer, lr_scheduler):
 
     return top1.avg, top5.avg, objs.avg, top1_adv.avg, top5_adv.avg, objs_adv.avg
 
+def spectral_clip(W, max_norm):
+    _, S, _ = torch.linalg.svd(W, full_matrices=False)
+    W.data = W * (max_norm/S[0])
 
 def main(args):
     np.random.seed(args.seed)
