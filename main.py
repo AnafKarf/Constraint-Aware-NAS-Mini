@@ -174,6 +174,19 @@ if __name__ == '__main__':
     parser.add_argument('--severity', type=int, default=None)
     parser.add_argument('--label_smooth', type=float, default=0.1, help='label smoothing')
     parser.add_argument('--ckpt_dir', type=str, default=None)
+    
+    # Constraint-Aware NAS arguments
+    parser.add_argument('--proj_constraints', action='store_true', default=False, 
+                       help='enable projected SGD for Lipschitz and activation constraints')
+    parser.add_argument('--beta', type=float, default=1.0, 
+                       help='spectral norm bound: σ₁(W) ≤ β')
+    parser.add_argument('--kappa_act', type=float, default=1.5, 
+                       help='activation derivative bound: ∂φ/∂x ≤ κ_act')
+    parser.add_argument('--constraint_warmup', type=int, default=5,
+                       help='epochs before enforcing constraints (for stability)')
+    parser.add_argument('--log_constraints', action='store_true', default=False,
+                       help='log constraint violation statistics')
+    
     args = parser.parse_args()
     args.device = torch.device("cuda:"+str(args.gpu) if torch.cuda.is_available() else "cpu")
     main(args) 

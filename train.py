@@ -327,6 +327,8 @@ def train(args, best_net, proxy_name=None):
         adjust_learning_rate(args, optimizer, epoch, args.learning_rate, dataset=args.dataset, lr_scheduler=lr_scheduler)
         model.drop_path_prob = args.drop_path_prob * epoch / args.epochs
 
+        # Pass current epoch for constraint warmup
+        args._current_epoch = epoch
         train_acc1, train_acc5, train_obj, train_acc1_adv, train_acc5_adv, train_obj_adv = train_single(args, train_queue, model, criterion, optimizer, lr_scheduler)
         print(f'epoch: {epoch}, train acc: {train_acc1:.3f}, train adv acc: {train_acc1_adv:.3f}')
 
@@ -402,7 +404,13 @@ def train_single(args, train_queue, model, criterion, optimizer, lr_scheduler):
         target = Variable(target).cuda(non_blocking=True)
 
         optimizer.zero_grad()
-        logits = model(input)
+        
+        # Handle auxiliary head output
+        if args.auxiliary:
+            logits, logits_aux = model(input)
+        else:
+            logits = model(input)
+            logits_aux = None
         
         if args.adv_loss == 'pgd':
             loss, logits_adv = madry_loss(
@@ -433,13 +441,33 @@ def train_single(args, train_queue, model, criterion, optimizer, lr_scheduler):
         else:
             loss = criterion(logits, target) 
             
-        if args.auxiliary:
+        if args.auxiliary and logits_aux is not None:
             loss_aux = criterion(logits_aux, target)
             loss += args.auxiliary_weight*loss_aux
         
         loss.backward()
-        nn.utils.clip_grad_norm(model.parameters(), args.grad_clip)
+        nn.utils.clip_grad_norm_(model.parameters(), args.grad_clip)
         optimizer.step()
+        
+        # Apply constraints after optimizer step (if enabled)
+        if hasattr(args, 'proj_constraints') and args.proj_constraints:
+            # Skip constraint enforcement during warmup period for stability
+            current_epoch = getattr(args, '_current_epoch', 0)
+            warmup_epochs = getattr(args, 'constraint_warmup', 5)
+            
+            if current_epoch >= warmup_epochs:
+                constraint_stats = apply_constraints(
+                    model, 
+                    beta=getattr(args, 'beta', 1.0),
+                    kappa_act=getattr(args, 'kappa_act', 1.5),
+                    log_violations=getattr(args, 'log_constraints', False)
+                )
+                
+                # Log constraint violations if requested
+                if constraint_stats and step % args.report_freq == 0:
+                    print(f'Constraints - Spectral violations: {constraint_stats["num_spectral_violations"]}, '
+                          f'Activation violations: {constraint_stats["num_activation_violations"]}, '
+                          f'Max spectral norm: {constraint_stats["max_spectral_norm"]:.3f}')
         
         prec1, prec5 = utils.accuracy(logits, target, topk=(1, 5))
         n = input.size(0)
