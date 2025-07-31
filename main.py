@@ -177,7 +177,7 @@ if __name__ == '__main__':
 
     # constraint-aware specific args
     parser.add_argument('--proj_constraints', action='store_true')
-    parser.add_argument('--kappa_act', type='float', default=1.5, help='desired kappa')
+    parser.add_argument('--kappa_act', type=float, default=1.5, help='desired kappa')
     parser.add_argument('--beta', type=float, default=1.0, help='beta value for spectral clip')
     args = parser.parse_args()
     args.device = torch.device("cuda:"+str(args.gpu) if torch.cuda.is_available() else "cpu")
