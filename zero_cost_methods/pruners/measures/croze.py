@@ -77,7 +77,7 @@ def compute_synflow_per_weight(net, inputs, targets, mode, split_data=1, loss_fn
             w_sim = (1+cos_loss(layer_adv.weight, layer.weight)).sum()
             sim = (torch.abs(cos_loss(layer_adv.weight.grad, layer.weight.grad))).sum()
             feat_sim = (1+cos_loss(feat_adv, feat)).sum()
-            return torch.abs(w_sim * sim * feat_sim)
+            return torch.where(torch.isnan(torch.abs(w_sim * sim * feat_sim)), torch.zeros_like(torch.abs(w_sim * sim * feat_sim)), torch.abs(w_sim * sim * feat_sim))
         else:
             return torch.zeros_like(layer.weight)
 

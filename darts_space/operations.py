@@ -106,11 +106,13 @@ class FactorizedReduce(nn.Module):
 
 class ParamSoftplusOP(nn.Module):
 
-  def __init__(self, omega_init=1.0):
+  def __init__(self, omega_init=0.5):
     super(ParamSoftplusOP, self).__init__()
 
     self.omega = nn.Parameter(torch.tensor(float(omega_init)))
 
   def forward(self, x):
-    return (1.0 / self.omega) * torch.log1p(torch.exp(self.omega * x))
+    omega = torch.clamp(self.omega, 0.001, 10.0)
+
+    return torch.nn.functional.softplus(omega * x) / (omega + 0.000001)
 

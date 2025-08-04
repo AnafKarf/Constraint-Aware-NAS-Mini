@@ -56,17 +56,17 @@ def sample_arch(args):
             best_arch_val = max_arch_val
 
         cnt += len(arch_list)
-        if cnt % 50 == 0:
+        if cnt % 50 == 1 and cnt > 50:
             print(f'cnt: {cnt}, arch: {prev_arch}')
             with open(os.path.join(args.save_dir, 'sample_history.txt'), 'a+') as f:
-                f.write(f'cnt: {cnt}, arch: {prev_arch}, value: {max_arch_val}\n')
+                f.write(f'cnt: {cnt}, current best arch: {best_arch}, value: {best_arch_val}\n')
                 f.close() 
                 
     end_time = time.time()
     print(f'proxy:{args.proxy_types}\ncnt: {cnt}, prev_arch: {best_arch}')
     with open(os.path.join(args.save_dir, 'sample_history.txt'), 'a+') as f:
         f.write(f'total time: {end_time-start_time}\n')
-        f.write(f'best arch: {best_arch}, proxy: {best_arch_val}')
+        f.write(f'best arch: {best_arch}, proxy: {best_arch_val}\n')
         f.close()
 
     return best_arch
