@@ -19,7 +19,6 @@ from nasbench_space.models import *
 from darts_space.genotypes import Genotype
 from darts_space.model import NetworkCIFAR as Network
 from attack.attack_lib import madry_loss, pgd_attack
-
 from darts_space.operations import ParamSoftplusOP
 
 
@@ -31,6 +30,11 @@ PCDARTS_IMAGENET = {'normal': [('skip_connect', 1), ('sep_conv_3x3', 0), ('sep_c
 CROZE_CIFAR10 = {'normal': [('avg_pool_3x3', 0), ('dil_conv_3x3', 1), ('dil_conv_5x5', 0), ('dil_conv_3x3', 1), ('max_pool_3x3', 2), ('sep_conv_3x3', 0), ('avg_pool_3x3', 1), ('skip_connect', 2), ('dil_conv_3x3', 3), ('sep_conv_5x5', 0), ('dil_conv_5x5', 1), ('sep_conv_3x3', 2), ('skip_connect', 3), ('sep_conv_7x7', 4)], 'reduction': [('avg_pool_3x3', 0), ('sep_conv_5x5', 1), ('conv_7x1_1x7', 0), ('sep_conv_5x5', 1), ('sep_conv_5x5', 2), ('conv_7x1_1x7', 0), ('sep_conv_7x7', 1), ('dil_conv_3x3', 2), ('dil_conv_3x3', 3), ('dil_conv_3x3', 0), ('sep_conv_7x7', 1), ('conv_7x1_1x7', 2), ('dil_conv_3x3', 3), ('sep_conv_3x3', 4)], 'normal_concat': [4, 5, 3, 4], 'reduction_concat': [3, 2, 5, 5]}
 CROZE_CIFAR100 =  {'normal': [('max_pool_3x3', 0), ('sep_conv_7x7', 1), ('avg_pool_3x3', 0), ('sep_conv_7x7', 1), ('max_pool_3x3', 2), ('avg_pool_3x3', 0), ('dil_conv_3x3', 1), ('dil_conv_3x3', 2), ('sep_conv_5x5', 3), ('sep_conv_7x7', 0), ('sep_conv_3x3', 1), ('skip_connect', 2), ('sep_conv_3x3', 3), ('skip_connect', 4)], 'reduction': [('sep_conv_3x3', 0), ('dil_conv_5x5', 1), ('sep_conv_3x3', 0), ('avg_pool_3x3', 1), ('avg_pool_3x3', 2), ('sep_conv_7x7', 0), ('dil_conv_3x3', 1), ('sep_conv_5x5', 2), ('avg_pool_3x3', 3), ('dil_conv_3x3', 0), ('max_pool_3x3', 1), ('avg_pool_3x3', 2), ('dil_conv_5x5', 3), ('avg_pool_3x3', 4)], 'normal_concat': [2, 2, 4, 5], 'reduction_concat': [3, 4, 5, 5]}
 CROZE_IMAGENET = {'normal': [('dil_conv_5x5', 0), ('avg_pool_3x3', 1), ('skip_connect', 0), ('sep_conv_3x3', 1), ('avg_pool_3x3', 2), ('dil_conv_3x3', 0), ('skip_connect', 1), ('sep_conv_3x3', 2), ('avg_pool_3x3', 3), ('sep_conv_3x3', 0), ('dil_conv_3x3', 1), ('sep_conv_3x3', 2), ('skip_connect', 3), ('sep_conv_7x7', 4)], 'reduction': [('sep_conv_7x7', 0), ('avg_pool_3x3', 1), ('sep_conv_5x5', 0), ('dil_conv_3x3', 1), ('skip_connect', 2), ('dil_conv_3x3', 0), ('max_pool_3x3', 1), ('sep_conv_5x5', 2), ('sep_conv_7x7', 3), ('skip_connect', 0), ('conv_7x1_1x7', 1), ('max_pool_3x3', 2), ('dil_conv_3x3', 3), ('avg_pool_3x3', 4)], 'normal_concat': [2, 5, 3, 4], 'reduction_concat': [3, 3, 4, 5]}
+
+BEST_ALL_1 = {'normal': [('max_pool_3x3', 0), ('dil_conv_5x5', 1), ('sep_conv_5x5', 0), ('avg_pool_3x3', 1), ('max_pool_3x3', 2), ('max_pool_3x3', 0), ('skip_connect', 1), ('avg_pool_3x3', 2), ('sep_conv_5x5', 3), ('sep_conv_3x3', 0), ('skip_connect', 1), ('sep_conv_5x5', 2), ('avg_pool_3x3', 3), ('max_pool_3x3', 4)], 'reduction': [('avg_pool_3x3', 0), ('conv_7x1_1x7', 1), ('skip_connect', 0), ('avg_pool_3x3', 1), ('conv_7x1_1x7', 2), ('max_pool_3x3', 0), ('dil_conv_3x3', 1), ('sep_conv_5x5', 2), ('dil_conv_3x3', 3), ('max_pool_3x3', 0), ('sep_conv_5x5', 1), ('dil_conv_5x5', 2), ('dil_conv_5x5', 3), ('sep_conv_3x3', 4)], 'normal_concat': [4, 4, 3, 3], 'reduction_concat': [3, 3, 5, 4]}
+BEST_ALL_2 = {'normal': [('skip_connect', 0), ('conv_7x1_1x7', 1), ('sep_conv_7x7', 0), ('max_pool_3x3', 1), ('skip_connect', 2), ('dil_conv_3x3', 0), ('dil_conv_3x3', 1), ('max_pool_3x3', 2), ('sep_conv_5x5', 3), ('max_pool_3x3', 0), ('dil_conv_3x3', 1), ('skip_connect', 2), ('skip_connect', 3), ('max_pool_3x3', 4)], 'reduction': [('conv_7x1_1x7', 0), ('dil_conv_5x5', 1), ('dil_conv_5x5', 0), ('sep_conv_3x3', 1), ('sep_conv_3x3', 2), ('skip_connect', 0), ('sep_conv_7x7', 1), ('dil_conv_5x5', 2), ('sep_conv_7x7', 3), ('avg_pool_3x3', 0), ('sep_conv_5x5', 1), ('conv_7x1_1x7', 2), ('avg_pool_3x3', 3), ('sep_conv_5x5', 4)], 'normal_concat': [2, 3, 2], 'reduction_concat': [4, 5, 4]}
+BEST_ALL_3 = {'normal': [('conv_7x1_1x7', 0), ('skip_connect', 1), ('avg_pool_3x3', 0), ('max_pool_3x3', 1), ('dil_conv_3x3', 2), ('sep_conv_5x5', 0), ('sep_conv_3x3', 1), ('dil_conv_3x3', 2), ('avg_pool_3x3', 3), ('avg_pool_3x3', 0), ('skip_connect', 1), ('max_pool_3x3', 2), ('dil_conv_3x3', 3), ('sep_conv_3x3', 4)], 'reduction': [('conv_7x1_1x7', 0), ('avg_pool_3x3', 1), ('max_pool_3x3', 0), ('dil_conv_5x5', 1), ('dil_conv_5x5', 2), ('skip_connect', 0), ('avg_pool_3x3', 1), ('avg_pool_3x3', 2), ('skip_connect', 3), ('avg_pool_3x3', 0), ('avg_pool_3x3', 1), ('avg_pool_3x3', 2), ('sep_conv_3x3', 3), ('max_pool_3x3', 4)], 'normal_concat': [3, 4, 4], 'reduction_concat': [2, 2, 3]} 
+BEST_ALL_4 = {'normal': [('max_pool_3x3', 0), ('avg_pool_3x3', 1), ('max_pool_3x3', 0), ('sep_conv_5x5', 1), ('max_pool_3x3', 2), ('skip_connect', 0), ('conv_7x1_1x7', 1), ('dil_conv_5x5', 2), ('skip_connect', 3), ('dil_conv_3x3', 0), ('skip_connect', 1), ('avg_pool_3x3', 2), ('dil_conv_5x5', 3), ('max_pool_3x3', 4)], 'reduction': [('max_pool_3x3', 0), ('sep_conv_3x3', 1), ('max_pool_3x3', 0), ('dil_conv_5x5', 1), ('sep_conv_7x7', 2), ('sep_conv_5x5', 0), ('dil_conv_5x5', 1), ('dil_conv_5x5', 2), ('sep_conv_7x7', 3), ('sep_conv_3x3', 0), ('dil_conv_3x3', 1), ('skip_connect', 2), ('skip_connect', 3), ('max_pool_3x3', 4)], 'normal_concat': [5, 4, 5, 4], 'reduction_concat': [4, 4, 5, 5]}
 
 
 def test(args, best_net):
@@ -445,10 +449,11 @@ def train_single(args, train_queue, model, criterion, optimizer, lr_scheduler):
 
         if args.proj_constraints:
             for name, W in model.named_parameters(): 
-                if 'weight' in name: W.data = spectral_clip(W.data, args.beta) 
+                if 'weight' in name: 
+                    spectral_clip(W, args.beta) 
             for mod in model.modules(): 
-                if isinstance(mod, ParamSoftplusOp): 
-                    mod.omega.data.clamp_(max=args.kappa*2)
+                if isinstance(mod, ParamSoftplusOP): 
+                    mod.omega.data.clamp_(max=args.kappa_act*2)
         
         prec1, prec5 = utils.accuracy(logits, target, topk=(1, 5))
         n = input.size(0)
@@ -470,8 +475,20 @@ def train_single(args, train_queue, model, criterion, optimizer, lr_scheduler):
     return top1.avg, top5.avg, objs.avg, top1_adv.avg, top5_adv.avg, objs_adv.avg
 
 def spectral_clip(W, max_norm):
-    _, S, _ = torch.linalg.svd(W, full_matrices=False)
-    W.data = W * (max_norm/S[0])
+    if W.data.dim() == 1:
+        W.data = W.data / torch.linalg.vector_norm(W.data)
+    elif W.dim() == 2:
+        _, S, _ = torch.linalg.svd(W.data, full_matrices=False)
+        max_singular = S[0]
+        if max_singular > max_norm:
+            W.data = W.data * (max_norm / max_singular)
+    else:
+        original_shape = W.shape
+        W_2d = W.data.view(original_shape[0], -1)
+        _, S, _ = torch.linalg.svd(W_2d, full_matrices=False)
+        max_singular = S[0]
+        if max_singular > max_norm:
+                    W.data = W.data * (max_norm / max_singular)
 
 def main(args):
     np.random.seed(args.seed)
@@ -495,6 +512,14 @@ def main(args):
         archs = CROZE_CIFAR100
     elif args.arch_type == 'croze_imagenet':
         archs = CROZE_IMAGENET
+    elif args.arch_type == 'best1':
+        archs = BEST_ALL_1
+    elif args.arch_type == 'best2':
+        archs = BEST_ALL_2
+    elif args.arch_type == 'best3':
+        archs = BEST_ALL_3
+    elif args.arch_type == 'best4':
+        archs = BEST_ALL_4
 
     if args.eval_only:
         test(args, archs)
@@ -542,6 +567,11 @@ if __name__ == '__main__':
     parser.add_argument('--severity', type=int, default=None)
     parser.add_argument('--label_smooth', type=float, default=0.1, help='label smoothing')
     parser.add_argument('--ckpt_dir', type=str, default=None)
+
+    # constraint-aware specific args
+    parser.add_argument('--proj_constraints', action='store_true')
+    parser.add_argument('--kappa_act', type=float, default=1.5, help='desired kappa')
+    parser.add_argument('--beta', type=float, default=1.0, help='beta value for spectral clip')
     args = parser.parse_args()
     main(args)
 
