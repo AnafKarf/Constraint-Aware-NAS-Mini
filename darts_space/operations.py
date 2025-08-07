@@ -112,7 +112,9 @@ class ParamSoftplusOP(nn.Module):
     self.omega = nn.Parameter(torch.tensor(float(omega_init)))
 
   def forward(self, x):
-    omega = torch.clamp(self.omega, 0.001, 10.0)
 
-    return torch.nn.functional.softplus(omega * x) / (omega + 0.000001)
+    if torch.norm(x) > 20.0:
+      return x 
+
+    return (1.0 / self.omega) * torch.log1p(torch.exp(self.omega * x))
 
