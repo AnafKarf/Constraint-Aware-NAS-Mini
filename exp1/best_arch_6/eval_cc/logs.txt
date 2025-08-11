@@ -1,0 +1,1 @@
+0 | valid/cc/loss 1.8160343889643351 | valid/cc/top1 32.0404 | valid/cc/top5 83.84586666666668 | 
