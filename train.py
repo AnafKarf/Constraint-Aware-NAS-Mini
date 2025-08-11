@@ -36,6 +36,10 @@ BEST_ALL_2 = {'normal': [('skip_connect', 0), ('conv_7x1_1x7', 1), ('sep_conv_7x
 BEST_ALL_3 = {'normal': [('conv_7x1_1x7', 0), ('skip_connect', 1), ('avg_pool_3x3', 0), ('max_pool_3x3', 1), ('dil_conv_3x3', 2), ('sep_conv_5x5', 0), ('sep_conv_3x3', 1), ('dil_conv_3x3', 2), ('avg_pool_3x3', 3), ('avg_pool_3x3', 0), ('skip_connect', 1), ('max_pool_3x3', 2), ('dil_conv_3x3', 3), ('sep_conv_3x3', 4)], 'reduction': [('conv_7x1_1x7', 0), ('avg_pool_3x3', 1), ('max_pool_3x3', 0), ('dil_conv_5x5', 1), ('dil_conv_5x5', 2), ('skip_connect', 0), ('avg_pool_3x3', 1), ('avg_pool_3x3', 2), ('skip_connect', 3), ('avg_pool_3x3', 0), ('avg_pool_3x3', 1), ('avg_pool_3x3', 2), ('sep_conv_3x3', 3), ('max_pool_3x3', 4)], 'normal_concat': [3, 4, 4], 'reduction_concat': [2, 2, 3]} 
 BEST_ALL_4 = {'normal': [('max_pool_3x3', 0), ('avg_pool_3x3', 1), ('max_pool_3x3', 0), ('sep_conv_5x5', 1), ('max_pool_3x3', 2), ('skip_connect', 0), ('conv_7x1_1x7', 1), ('dil_conv_5x5', 2), ('skip_connect', 3), ('dil_conv_3x3', 0), ('skip_connect', 1), ('avg_pool_3x3', 2), ('dil_conv_5x5', 3), ('max_pool_3x3', 4)], 'reduction': [('max_pool_3x3', 0), ('sep_conv_3x3', 1), ('max_pool_3x3', 0), ('dil_conv_5x5', 1), ('sep_conv_7x7', 2), ('sep_conv_5x5', 0), ('dil_conv_5x5', 1), ('dil_conv_5x5', 2), ('sep_conv_7x7', 3), ('sep_conv_3x3', 0), ('dil_conv_3x3', 1), ('skip_connect', 2), ('skip_connect', 3), ('max_pool_3x3', 4)], 'normal_concat': [5, 4, 5, 4], 'reduction_concat': [4, 4, 5, 5]}
 
+BEST_ALL_5 = {'normal': [('sep_conv_7x7', 0), ('dil_conv_3x3', 1), ('sep_conv_3x3', 0), ('sep_conv_3x3', 1), ('skip_connect', 2), ('max_pool_3x3', 0), ('sep_conv_5x5', 1), ('avg_pool_3x3', 2), ('avg_pool_3x3', 3), ('dil_conv_3x3', 0), ('max_pool_3x3', 1), ('dil_conv_5x5', 2), ('dil_conv_5x5', 3), ('dil_conv_3x3', 4)], 'reduction': [('avg_pool_3x3', 0), ('skip_connect', 1), ('sep_conv_5x5', 0), ('sep_conv_5x5', 1), ('sep_conv_5x5', 2), ('conv_7x1_1x7', 0), ('skip_connect', 1), ('dil_conv_3x3', 2), ('dil_conv_3x3', 3), ('sep_conv_5x5', 0), ('max_pool_3x3', 1), ('avg_pool_3x3', 2), ('dil_conv_3x3', 3), ('avg_pool_3x3', 4)], 'normal_concat': [2, 4, 5, 3], 'reduction_concat': [3, 2, 4, 2]}
+BEST_ALL_6 = {'normal': [('avg_pool_3x3', 0), ('conv_7x1_1x7', 1), ('dil_conv_3x3', 0), ('dil_conv_5x5', 1), ('sep_conv_5x5', 2), ('skip_connect', 0), ('max_pool_3x3', 1), ('sep_conv_3x3', 2), ('dil_conv_5x5', 3), ('sep_conv_5x5', 0), ('max_pool_3x3', 1), ('dil_conv_5x5', 2), ('dil_conv_3x3', 3), ('skip_connect', 4)], 'reduction': [('dil_conv_3x3', 0), ('max_pool_3x3', 1), ('skip_connect', 0), ('sep_conv_7x7', 1), ('dil_conv_5x5', 2), ('sep_conv_3x3', 0), ('dil_conv_5x5', 1), ('dil_conv_5x5', 2), ('sep_conv_3x3', 3), ('dil_conv_5x5', 0), ('sep_conv_3x3', 1), ('skip_connect', 2), ('sep_conv_3x3', 3), ('skip_connect', 4)], 'normal_concat': [5, 5, 2], 'reduction_concat': [4, 4, 4]}
+BEST_ALL_7 = {'normal': [('conv_7x1_1x7', 0), ('max_pool_3x3', 1), ('skip_connect', 0), ('max_pool_3x3', 1), ('skip_connect', 2), ('dil_conv_3x3', 0), ('skip_connect', 1), ('sep_conv_3x3', 2), ('max_pool_3x3', 3), ('dil_conv_5x5', 0), ('dil_conv_5x5', 1), ('skip_connect', 2), ('skip_connect', 3), ('sep_conv_7x7', 4)], 'reduction': [('dil_conv_5x5', 0), ('dil_conv_5x5', 1), ('conv_7x1_1x7', 0), ('sep_conv_7x7', 1), ('sep_conv_7x7', 2), ('sep_conv_7x7', 0), ('sep_conv_3x3', 1), ('skip_connect', 2), ('dil_conv_3x3', 3), ('avg_pool_3x3', 0), ('sep_conv_3x3', 1), ('dil_conv_5x5', 2), ('skip_connect', 3), ('skip_connect', 4)], 'normal_concat': [5, 4, 5], 'reduction_concat': [2, 2, 3]}
+BEST_ALL_8 = {'normal': [('dil_conv_5x5', 0), ('max_pool_3x3', 1), ('conv_7x1_1x7', 0), ('skip_connect', 1), ('max_pool_3x3', 2), ('skip_connect', 0), ('dil_conv_5x5', 1), ('skip_connect', 2), ('sep_conv_3x3', 3), ('sep_conv_7x7', 0), ('dil_conv_3x3', 1), ('max_pool_3x3', 2), ('avg_pool_3x3', 3), ('dil_conv_3x3', 4)], 'reduction': [('sep_conv_7x7', 0), ('max_pool_3x3', 1), ('sep_conv_3x3', 0), ('sep_conv_5x5', 1), ('max_pool_3x3', 2), ('skip_connect', 0), ('sep_conv_7x7', 1), ('sep_conv_7x7', 2), ('max_pool_3x3', 3), ('sep_conv_7x7', 0), ('avg_pool_3x3', 1), ('sep_conv_7x7', 2), ('avg_pool_3x3', 3), ('max_pool_3x3', 4)], 'normal_concat': [4, 4, 3, 2], 'reduction_concat': [3, 3, 5, 3]}
 
 def test(args, best_net):
     
@@ -520,6 +524,14 @@ def main(args):
         archs = BEST_ALL_3
     elif args.arch_type == 'best4':
         archs = BEST_ALL_4
+    elif args.arch_type == 'best5':
+        archs = BEST_ALL_5
+    elif args.arch_type == 'best6':
+        archs = BEST_ALL_6
+    elif args.arch_type == 'best7':
+        archs = BEST_ALL_7
+    elif args.arch_type == 'best8':
+        archs = BEST_ALL_8
 
     if args.eval_only:
         test(args, archs)
