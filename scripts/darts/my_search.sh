@@ -1,0 +1,1 @@
+python main.py --search_space darts --proxy_types 'croze'  --data /path/to/cifar10 --dataset cifar10 --epochs 0 --save_dir exp3/ --w_sampling --sample_num 1000

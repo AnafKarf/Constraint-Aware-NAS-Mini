@@ -1,0 +1,1 @@
+python train.py --search_space darts --arch_type best5 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_5/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_5

@@ -1,0 +1,1 @@
+python train.py --arch_type best5 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_5/ --data /path/to/cifar10
