@@ -1,1 +1,13 @@
+python train.py --arch_type best3 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_3/ --data /path/to/cifar10
+python train.py --arch_type best4 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_4/ --data /path/to/cifar10
 python train.py --arch_type best5 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_5/ --data /path/to/cifar10
+python train.py --arch_type best6 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_6/ --data /path/to/cifar10
+python train.py --arch_type best7 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_7/ --data /path/to/cifar10
+python train.py --arch_type best8 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_8/ --data /path/to/cifar10
+python train.py --arch_type best9 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_9/ --data /path/to/cifar10
+python train.py --arch_type best10 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_10/ --data /path/to/cifar10
+python train.py --arch_type best11 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_11/ --data /path/to/cifar10
+python train.py --arch_type best12 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_12/ --data /path/to/cifar10
+python train.py --arch_type best13 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_13/ --data /path/to/cifar10
+python train.py --arch_type best14 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_14/ --data /path/to/cifar10
+python train.py --arch_type best15 --dataset cifar10 --epochs 5 --proj_constraints --save_dir exp1/best_arch_15/ --data /path/to/cifar10

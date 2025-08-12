@@ -56,7 +56,7 @@ def sample_arch(args):
             best_arch_val = max_arch_val
 
         cnt += len(arch_list)
-        if cnt % 50 == 1 and cnt > 50:
+        if cnt % 20 == 1:
             print(f'cnt: {cnt}, arch: {prev_arch}')
             with open(os.path.join(args.save_dir, 'sample_history.txt'), 'a+') as f:
                 f.write(f'cnt: {cnt}, current best arch: {best_arch}, value: {best_arch_val}\n')

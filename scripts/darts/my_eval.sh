@@ -1,1 +1,15 @@
+python train.py --search_space darts --arch_type best1 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_1/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_1
+python train.py --search_space darts --arch_type best2 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_2/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_2
+python train.py --search_space darts --arch_type best3 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_3/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_3
+python train.py --search_space darts --arch_type best4 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_4/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_4
 python train.py --search_space darts --arch_type best5 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_5/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_5
+python train.py --search_space darts --arch_type best6 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_6/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_6
+python train.py --search_space darts --arch_type best7 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_7/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_7
+python train.py --search_space darts --arch_type best8 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_8/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_8
+python train.py --search_space darts --arch_type best9 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_9/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_9
+python train.py --search_space darts --arch_type best10 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_10/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_10
+python train.py --search_space darts --arch_type best11 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_11/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_11
+python train.py --search_space darts --arch_type best12 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_12/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_12
+python train.py --search_space darts --arch_type best13 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_13/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_13
+python train.py --search_space darts --arch_type best14 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_14/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_14
+python train.py --search_space darts --arch_type best15 --eval_only --eval_cc --eval_attack_type pgd --save_dir exp1/best_arch_15/attack --data /path/to/cifar10  --dataset cifar10 --ckpt_dir exp1\best_arch_15
