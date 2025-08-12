@@ -1,0 +1,1 @@
+0 | epoch 0 | valid/adv/loss 3.114152450942993 | valid/adv/top1 2.1 | valid/adv/top5 32.35 | valid/clean/loss 2.214234389877319 | valid/clean/top1 16.03 | valid/clean/top5 67.72 | 
